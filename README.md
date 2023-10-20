@@ -14,7 +14,9 @@ To use this tool you will require/need to:
 For detailed steps to setting up the Speech-to-Text API you can refer to this link but only follow first part (most of it is irrelevant as we are transcribing files greater than 60 seconds):
 https://codelabs.developers.google.com/codelabs/cloud-speech-text-python3/#1
 
-You will also need to setup authentication using Application Default Credentials (ADC) (because we are accessing the project outside of the Cloud Shell)
+You will also need to setup authentication using Application Default Credentials (ADC) (because we are accessing the project outside of the Cloud Shell). 
+Steps to creating your credential file:
+https://cloud.google.com/docs/authentication/provide-credentials-adc
 
 You will also need to create .env and edit it:
 # Development settings
@@ -35,12 +37,12 @@ So step one is to convert to FLAC using ffmpeg:
 ffmpeg -i 2019-03-02-10-00-00.mp3 -c:a flac 2019-03-02-10-00-00.flac
 
 Create python virtual env and then activate:
-source venv-speech/bin/activate
+source venv-transcribe/bin/activate
 
-Todo: put the following in requirements.txt:
+Todo later: put the following in requirements.txt:
 
 `pip install python-dotenv`
-`pip install --upgrade google-cloud-storage`
+`pip install google-cloud-storage`
 
 Asynchronous speech recognition starts a long running audio processing operation. Use asynchronous speech recognition to transcribe audio that is longer than 60 seconds.
 

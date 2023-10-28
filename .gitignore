@@ -163,3 +163,4 @@ cython_debug/
 # Google Cloud SDK
 google-cloud-sdk
 google-cloud-cli-451.0.1-*
+.vscode/settings.json

@@ -1,7 +1,7 @@
 # Artyom
 Artyom is tool which takes a batch of audio files and transcribes them into their native language as well as creating a translation into english. 
 
-Intended use of this tool: Download a bunch of podcasts in foreign languages, upload them to Google bucket and run this script to transcribe them. 
+Intended use of this tool: Download a bunch of podcasts in a foreign language, upload them to Google bucket and run this script to transcribe them. 
 After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available.
 
 To use this tool you will require:
@@ -9,7 +9,7 @@ To use this tool you will require:
 - a Google Service Account with billing enabled
 
 You will need to:
-- enable the Speech-to-Text AP 
+- enable the Speech-to-Text API and translate.googleapis.com
 - create a Google Storage bucket with Speech Administrator role
 - create a python virtual environment to separate dependencies   
 For detailed steps to setting up the Speech-to-Text API you can refer to this link but only follow first part (most of it is irrelevant as we are transcribing files greater than 60 seconds):
@@ -21,7 +21,8 @@ https://cloud.google.com/docs/authentication/provide-credentials-adc
 
 You will also need to create .env and edit it:  
 GOOGLE_BUCKET="gs://path/to/bucket"  
-BUCKET_NAME = "bucket_name"  
+BUCKET_NAME = "bucket_name"    
+PROJECT_ID = "google_project_id"
 
 
 Note: transcribe.py script uses Google Cloud Speech-to-Text API and as such is an imperfect transciption of the audio file. 
@@ -37,7 +38,11 @@ source venv-transcribe/bin/activate
 Todo later: put the following in requirements.txt:
 
 `pip install python-dotenv`  
-`pip install google-cloud-storage`
+`pip install google-cloud-storage`   
+`pip install google-cloud-speech`  
+`pip install ipython google-cloud-translate`  
 
 Asynchronous speech recognition starts a long running audio processing operation. Asynchronous speech recognition is used to transcribe audio that is longer than 60 seconds.
 To use asynchronous speech recognition to transcribe audio longer than 60 seconds, you must have your data saved in a Google Cloud Storage bucket.
+
+ Text is translated using the Neural Machine Translation (NMT) model. If the NMT model is not supported for the requested language translation pair, the Phrase-Based Machine Translation (PBMT) model is used.

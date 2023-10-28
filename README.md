@@ -2,7 +2,7 @@
 Artyom is tool which takes a batch of audio files and transcribes them into their native language as well as creating a translation into english. 
 
 Intended use of this tool: Download a bunch of podcasts in foreign languages, upload them to Google bucket and run this script to transcribe them. 
-After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. And there are some languages with very few learning materials available so you can use tools that scrap the audio from video content and then run this script.
+After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available.
 
 To use this tool you will require:
 - a Google Cloud Project

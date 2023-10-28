@@ -1,8 +1,8 @@
 # Artyom
 Artyom is tool which takes a batch of audio files and transcribes them into their native language as well as creating a translation into english. 
 
-Intended use of this tool: about once a week download a bunch of podcasts in foreign languages, upload them to Google bucket and run this script to transcribe them. 
-After listening to the podcasts I can then come back and read the transcripts to see what I missed.
+Intended use of this tool: Download a bunch of podcasts in foreign languages, upload them to Google bucket and run this script to transcribe them. 
+After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. And there are some languages with very few learning materials available so you can use tools that scrap the audio from video content and then run this script.
 
 To use this tool you will require:
 - a Google Cloud Project
@@ -24,13 +24,8 @@ GOOGLE_BUCKET="gs://path/to/bucket"
 BUCKET_NAME = "bucket_name"  
 
 
-Project Uses:
-Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. 
-The tool is also useful for learning languages where there is limited freely available materials beyond the beginner courses. (I found this to be the case in trying to learn Hebrew and Maori). 
-This is a tool suitable for people at an intermediate level of a language, who are unconcerned with making mistakes and just want to consume more interesting content in their target language. 
-
 Note: transcribe.py script uses Google Cloud Speech-to-Text API and as such is an imperfect transciption of the audio file. 
-Note: it may take a while to do the transcription/translation depending on how heavily the batch to transcribe is.
+Note: it may take a while to do the transcription/translation depending on how heavy the batch to transcribe is.
 
 For best results, the audio source should be captured and transmitted using a lossless encoding (FLAC or LINEAR16).
 So step one is to convert to FLAC using ffmpeg: 

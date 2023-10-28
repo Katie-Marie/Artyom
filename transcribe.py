@@ -17,13 +17,22 @@ def transcribe_gcs(gcs_uri: str) -> str:
 
     audio = speech.RecognitionAudio(uri=gcs_uri)
     config = speech.RecognitionConfig(
-    encoding=speech.RecognitionConfig.AudioEncoding.FLAC,
-    sample_rate_hertz=44100,
-    language_code="ru-RU",
-    audio_channel_count=2 
+        encoding=speech.RecognitionConfig.AudioEncoding.FLAC,
+        sample_rate_hertz=44100,
+        # Change code if you are using a different language
+        language_code="ru-RU",
+        audio_channel_count=2 
+    )
+# Create a TranscriptOutputConfig object
+    transcript_output_config =  speech.TranscriptOutputConfig(gcs_uri=bucket_name)
+
+    request = speech.LongRunningRecognizeRequest(
+    config=config,
+    audio=audio,
+    output_config=transcript_output_config
     )
 
-    operation = client.long_running_recognize(config=config, audio=audio)
+    operation = client.long_running_recognize(request=request)
 
     print("Waiting for operation to complete...")
     #response = operation.result(timeout=90)
@@ -45,7 +54,7 @@ def transcribe_gcs(gcs_uri: str) -> str:
 # Todo: Create folder in bucket with date to place the results
 
 
-def run_transcibe_on_each_file(bucket_name):
+def run_transcibe_on_each_file(google_bucket_path, bucket_name):
 
     storage_client = storage.Client()
 
@@ -58,9 +67,10 @@ def run_transcibe_on_each_file(bucket_name):
             print("\nTranscribing the file: " + blob.name)
             transcribe_gcs(f"{google_bucket_path}/{blob.name}")
 
+
 if __name__ == "__main__":
     load_dotenv() # take environment variables from .env.
     google_bucket_path = os.environ["GOOGLE_BUCKET"]
     bucket_name = os.environ["BUCKET_NAME"]
 
-    run_transcibe_on_each_file(bucket_name)
+    run_transcibe_on_each_file(google_bucket_path, bucket_name)

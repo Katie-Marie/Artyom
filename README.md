@@ -39,8 +39,5 @@ Todo later: put the following in requirements.txt:
 `pip install python-dotenv`  
 `pip install google-cloud-storage`
 
-Asynchronous speech recognition starts a long running audio processing operation. Use asynchronous speech recognition to transcribe audio that is longer than 60 seconds.
-
+Asynchronous speech recognition starts a long running audio processing operation. Asynchronous speech recognition is used to transcribe audio that is longer than 60 seconds.
 To use asynchronous speech recognition to transcribe audio longer than 60 seconds, you must have your data saved in a Google Cloud Storage bucket.
-
-You can retrieve the results of the operation using the google.longrunning.Operations method. Results remain available for retrieval for 5 days (120 hours). You also have the option of uploading your results directly to a Google Cloud Storage bucket.

@@ -9,7 +9,7 @@ To use this tool you will require:
 - a Google Service Account with billing enabled
 
 You will need to:
-- enable the Speech-to-Text API and translate.googleapis.com
+- enable the Speech-to-Text API and Translate API
 - create a Google Storage bucket with Speech Administrator role
 - create a python virtual environment to separate dependencies   
 For detailed steps to setting up the Speech-to-Text API you can refer to this link but only follow first part (most of it is irrelevant as we are transcribing files greater than 60 seconds):

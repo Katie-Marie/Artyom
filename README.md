@@ -52,6 +52,6 @@ Run the command
 `python transcribe.py -h`  
 to see usage.
 
-(venv-transcribe) pwd$ python3 transcribe.py "ru-RU"
+(venv-transcribe) pwd$ python3 transcribe.py "ru-RU" '/home/usr/Audio/...'
 
-I have used this tool successfully with files shorter than 30 mins. It's super cool opening up the files and seeing the transcription and translations :-)
+I have used this tool successfully with files shorter than 30 mins. It's super cool opening up the files and seeing the transcription and translations.

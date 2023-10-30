@@ -8,10 +8,12 @@ import argparse
 parser = argparse.ArgumentParser(description='Transcribe audio files in a bucket')
 parser.add_argument('language_code', metavar='L', type=str, nargs='+',
                     help='Code for the language of the original audio. E.g Russian="ru-RU", English="en-US", Hebrew="iw-IL", German="de-DE".  Lookup speech-to-text-supported-languages')
-
+parser.add_argument('local_path_raw_audio', metavar='A', type=str, nargs='+',
+                    help='Path to local folder with raw audio files')
 
 args = parser.parse_args()
 language_code = args.language_code[0]
+local_audio_path = args.local_path_raw_audio[0]
 print('Transcribing from '+ language_code + ' to English')
 
 def transcribe_gcs(gcs_uri: str, output_file_name) -> str:
@@ -135,6 +137,22 @@ def run_transcibe_on_each_file(bucket_name):
 if __name__ == "__main__":
 
     load_dotenv() # take environment variables from .env.
+    
+    print('Local Path with files expected in mp3 format: ' +local_audio_path)
+    for filename in os.listdir(local_audio_path): 
+        if (filename.endswith(".mp3")): #or .avi, .mpeg, whatever.
+            print('Current file: ' + filename)
+            # use ffmpeg to convert to flac
+            without_extension = filename.split('.')[0]
+            os.system("ffmpeg -i {local_audio_path}/{filename} -c:a flac {local_audio_path}/{without_extension}.flac".format(local_audio_path = local_audio_path, filename=filename, without_extension=without_extension))
+          
+
+           
+        else:
+            continue
+    # Google bucket is necessary for the transcription output but first we want to take the audio files that are downloaded to a local folder, convert them to flac and upload them to the bucket.
+    # 
+    #  
     bucket_name = os.environ["BUCKET_NAME"]
     PROJECT_ID = os.environ.get("PROJECT_ID", "") # Your GCP Project ID
     PARENT = f"projects/{PROJECT_ID}"

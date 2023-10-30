@@ -49,7 +49,7 @@ def transcribe_gcs(gcs_uri: str, output_file_name) -> str:
 
     print("Waiting for operation to complete...")
     #response = operation.result(timeout=90)
-    response = operation.result(timeout=200)
+    response = operation.result(timeout=20000)
 
     transcript_builder = []
     translation_builder = []

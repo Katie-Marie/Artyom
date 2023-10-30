@@ -2,7 +2,7 @@
 Artyom is tool which takes a batch of audio files and transcribes them into their native language as well as creating a translation into english. 
 
 Intended use of this tool: Download a bunch of podcasts in a foreign language, upload them to Google bucket and run this script to transcribe them. 
-After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available.
+After listening to the podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available. 
 
 To use this tool you will require:
 - a Google Cloud Project
@@ -29,7 +29,7 @@ Note: transcribe.py script uses Google Cloud Speech-to-Text API and as such is a
 Note: it may take a while to do the transcription/translation depending on how heavy the batch to transcribe is.
 
 For best results, the audio source should be captured and transmitted using a lossless encoding (FLAC or LINEAR16).
-So step one is to convert to FLAC using ffmpeg: 
+So step one is to convert to FLAC using ffmpeg:   
 ffmpeg -i 2019-03-02-10-00-00.mp3 -c:a flac 2019-03-02-10-00-00.flac
 
 Create python virtual env and then activate:
@@ -53,3 +53,5 @@ Run the command
 to see usage.
 
 (venv-transcribe) pwd$ python3 transcribe.py "ru-RU"
+
+I have used this tool successfully with files shorter than 30 mins. It's super cool opening up the files and seeing the transcription and translations :-)

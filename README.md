@@ -1,8 +1,8 @@
 # Artyom
 Artyom is a tool which takes a batch of audio files and transcribes them into their native language as well as creating a translation into english. 
 
-Intended use of this tool: Download a bunch of podcasts in a foreign language, upload them to a Google bucket and run this script to transcribe and translate them. 
-After listening to podcasts I can then come back and read the transcripts to see what I missed. Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available. 
+Intended use of this tool: After downloading a bunch of podcasts in a foreign language, run this script to create transcriptions and translations in a google bucket. 
+Often there will be an interesting podcast in the language you are trying to learn but no transcripts/translations available. It's also useful when you are trying to learn a language with very few learning materials available. 
 
 To use this tool you will require:
 - a Google Cloud Project
@@ -25,12 +25,10 @@ BUCKET_NAME = "bucket_name"
 PROJECT_ID = "google_project_id"
 
 
+Then create a local folder populated with, for example, dowloaded podcasts in mp3 format.
+
 Note: transcribe.py script uses Google Cloud Speech-to-Text API and as such is an imperfect transciption of the audio file. 
 Note: it may take a while to do the transcription/translation depending on how heavy the batch to transcribe is.
-
-For best results, the audio source should be captured and transmitted using a lossless encoding (FLAC or LINEAR16).
-So step one is to convert to FLAC using ffmpeg:   
-ffmpeg -i filename.mp3 -c:a flac output_filename.flac
 
 Create python virtual env and then activate:
 source venv-transcribe/bin/activate
@@ -41,6 +39,12 @@ Todo later: put the following in requirements.txt:
 `pip install google-cloud-storage`   
 `pip install google-cloud-speech`  
 `pip install ipython google-cloud-translate`  
+
+
+For best results, the audio source should be captured and transmitted using a lossless encoding (FLAC or LINEAR16).
+So step one is to take all the raw mp3 audio files and convert to FLAC using ffmpeg:   
+ffmpeg -i filename.mp3 -c:a flac output_filename.flac
+
 
 Asynchronous speech recognition starts a long running audio processing operation. Asynchronous speech recognition is used to transcribe audio that is longer than 60 seconds.
 To use asynchronous speech recognition to transcribe audio longer than 60 seconds, you must have your data saved in a Google Cloud Storage bucket.

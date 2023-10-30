@@ -33,7 +33,6 @@ def transcribe_gcs(gcs_uri: str, output_file_name) -> str:
     audio = speech.RecognitionAudio(uri=gcs_uri)
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.FLAC,
-        sample_rate_hertz=44100,
         language_code=language_code, 
         audio_channel_count=2 
     )
@@ -137,7 +136,8 @@ def run_transcibe_on_each_file(bucket_name):
 if __name__ == "__main__":
 
     load_dotenv() # take environment variables from .env.
-    
+
+    # Google bucket is necessary for the transcription output but first we want to take the audio files that are downloaded to a local folder, convert them to flac and upload them to the bucket.
     print('Local Path with files expected in mp3 format: ' +local_audio_path)
     for filename in os.listdir(local_audio_path): 
         if (filename.endswith(".mp3")): #or .avi, .mpeg, whatever.
@@ -145,14 +145,11 @@ if __name__ == "__main__":
             # use ffmpeg to convert to flac
             without_extension = filename.split('.')[0]
             os.system("ffmpeg -i {local_audio_path}/{filename} -c:a flac {local_audio_path}/{without_extension}.flac".format(local_audio_path = local_audio_path, filename=filename, without_extension=without_extension))
-          
-
-           
+            # upload to bucket
+            upload_blob(os.environ["BUCKET_NAME"], f"{local_audio_path}/{without_extension}.flac", f"{without_extension}.flac")
         else:
             continue
-    # Google bucket is necessary for the transcription output but first we want to take the audio files that are downloaded to a local folder, convert them to flac and upload them to the bucket.
-    # 
-    #  
+
     bucket_name = os.environ["BUCKET_NAME"]
     PROJECT_ID = os.environ.get("PROJECT_ID", "") # Your GCP Project ID
     PARENT = f"projects/{PROJECT_ID}"

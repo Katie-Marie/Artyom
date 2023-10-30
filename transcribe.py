@@ -67,12 +67,9 @@ def transcribe_gcs(gcs_uri: str, output_file_name) -> str:
     english_trans_file = open(r'english_trans.txt', 'w')
     english_trans_file.write(translation)
     english_trans_file.close()
-    #print(transcript)
 
     # Alternatively I could Write an Event-driven cloud function to detect when a new output file is created in the bucket and run a python script to translate it.
-    # https://cloud.google.com/functions/docs/calling/storage#python
     # https://cloud.google.com/functions/docs/calling/storage#functions-calling-storage-python
-    # https://cloud.google.com/storage/docs/pubsub-notifications
     # https://cloud.google.com/storage/docs/pubsub-notifications#_Event_types
 
 

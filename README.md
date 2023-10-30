@@ -46,3 +46,10 @@ Asynchronous speech recognition starts a long running audio processing operation
 To use asynchronous speech recognition to transcribe audio longer than 60 seconds, you must have your data saved in a Google Cloud Storage bucket.
 
  Text is translated using the Neural Machine Translation (NMT) model. If the NMT model is not supported for the requested language translation pair, the Phrase-Based Machine Translation (PBMT) model is used.
+
+
+Run the command   
+`python transcribe.py -h`  
+to see usage.
+
+(venv-transcribe) pwd$ python3 transcribe.py "ru-RU"

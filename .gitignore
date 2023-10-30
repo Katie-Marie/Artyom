@@ -164,3 +164,4 @@ cython_debug/
 google-cloud-sdk
 google-cloud-cli-451.0.1-*
 .vscode/settings.json
+english_trans.txt
